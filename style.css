@@ -58,6 +58,7 @@ h2 {
 #player .far,
 #player .choice {
   color: rgba(0, 179, 60, 0.966);
+  cursor: pointer;
 }
 
 #computer .far,
