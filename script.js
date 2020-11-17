@@ -37,6 +37,18 @@ function resetSelected() {
   })
 }
 
+// Reset score and player/computer choice
+function resetAll() {
+  resetSelected();
+  playerScoreNumber = 0;
+  computerScoreNumber = 0;
+  playerChoiceEl.textContent = "";
+  computerChoiceEl.textContent = "";
+  playerScoreEl.textContent = playerScoreNumber;
+  computerScoreEl.textContent = computerScoreNumber;
+  resultText.textContent = "Play!"
+}
+
 function computerRandomChoice() {
   const computerChoiceNumber = Math.random();
   if (computerChoiceNumber < 0.2) {
@@ -87,7 +99,6 @@ function updateScore(playerChoice) {
     resultText.textContent = "It's a tie!";
   } else {
     const choice = choices[playerChoice];
-    console.log(choice.defeats.indexOf(computerChoice));
     if (choice.defeats.indexOf(computerChoice) > -1) {
       resultText.textContent = "You won!!!";
       playerScoreNumber++;
