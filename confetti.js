@@ -1,164 +1,11 @@
-const playerScoreEl = document.getElementById("playerScore");
-const playerChoiceEl = document.getElementById("playerChoice");
-const computerScoreEl = document.getElementById("computerScore");
-const computerChoiceEl = document.getElementById("computerChoice");
-const resultText = document.getElementById("resultText");
+// confetti.js downloaded from https://www.cssscript.com/confetti-falling-animation/
 
-const playerRock = document.getElementById("playerRock");
-const playerPaper = document.getElementById("playerPaper");
-const playerScissors = document.getElementById("playerScissors");
-const playerLizard = document.getElementById("playerLizard");
-const playerSpock = document.getElementById("playerSpock");
-
-const computerRock = document.getElementById("computerRock");
-const computerPaper = document.getElementById("computerPaper");
-const computerScissors = document.getElementById("computerScissors");
-const computerLizard = document.getElementById("computerLizard");
-const computerSpock = document.getElementById("computerSpock");
-
-const allGameIcons = document.querySelectorAll(".far");
-
-const choices = {
-  rock: { name: 'Rock', defeats: ['scissors', 'lizard'] },
-  paper: { name: 'Paper', defeats: ['rock', 'spock'] },
-  scissors: { name: 'Scissors', defeats: ['paper', 'lizard'] },
-  lizard: { name: 'Lizard', defeats: ['paper', 'spock'] },
-  spock: { name: 'Spock', defeats: ['scissors', 'rock'] },
-};
-
-let playerScoreNumber = 0;
-let computerScoreNumber = 0;
-let computerChoice = "";
-
-// Reset "selected" class for all icons
-function resetSelected() {
-  allGameIcons.forEach((icon) => {
-    icon.classList.remove("selected");
-  });
-  stopConfetti();
-  removeConfetti();
-}
-
-// Reset score and player/computer choice
-function resetAll() {
-  resetSelected();
-  playerScoreNumber = 0;
-  computerScoreNumber = 0;
-  playerChoiceEl.textContent = "";
-  computerChoiceEl.textContent = "";
-  playerScoreEl.textContent = playerScoreNumber;
-  computerScoreEl.textContent = computerScoreNumber;
-  resultText.textContent = "Play now!"
-}
-
-function computerRandomChoice() {
-  const computerChoiceNumber = Math.random();
-  if (computerChoiceNumber < 0.2) {
-    computerChoice = "rock";
-  } else if (computerChoiceNumber <= 0.4) {
-    computerChoice = "paper";
-  } else if (computerChoiceNumber <= 0.6) {
-    computerChoice = "scissors";
-  } else if (computerChoiceNumber <= 0.8) {
-    computerChoice = "lizard";
-  } else {
-    computerChoice = "spock";
-  }
-}
-
-// Add selected styling in computer choice
-function displayComputerChoice() {
-  switch(computerChoice) {
-    case "rock":
-      computerRock.classList.add("selected");
-      computerChoiceEl.textContent = " --- Rock";
-      break;
-    case "paper":
-      computerPaper.classList.add("selected");
-      computerChoiceEl.textContent = " --- Paper";
-      break;
-    case "scissors":
-      computerScissors.classList.add("selected");
-      computerChoiceEl.textContent = " --- Scissors";
-      break;
-    case "lizard":
-      computerLizard.classList.add("selected");
-      computerChoiceEl.textContent = " --- Lizard";
-      break;
-    case "spock":
-      computerSpock.classList.add("selected");
-      computerChoiceEl.textContent = " --- Spock";
-      break;
-    default:
-      break;
-  }
-}
-
-// Check results, increase scores and update result text
-function updateScore(playerChoice) {
-  // Tie
-  if (playerChoice === computerChoice) {
-    resultText.textContent = "It's a tie!";
-  } else {
-    const choice = choices[playerChoice];
-    if (choice.defeats.indexOf(computerChoice) > -1) {
-      resultText.textContent = "You won!!!";
-      startConfetti();
-      playerScoreNumber++;
-      playerScoreEl.textContent = playerScoreNumber;
-    } else {
-      resultText.textContent = "You lost :(";
-      computerScoreNumber++;
-      computerScoreEl.textContent = computerScoreNumber;
-    }
-  }
-}
-
-// Call functions to process turn
-function checkResult(playerChoice) {
-  resetSelected();
-  computerRandomChoice();
-  displayComputerChoice();
-  updateScore(playerChoice);
-}
-
-// Passing player selection value and styling the icons
-function select(playerChoice) {
-  checkResult(playerChoice);
-  // Add selected styling and update playerChoice
-  switch(playerChoice) {
-    case "rock":
-      playerRock.classList.add("selected");
-      playerChoiceEl.textContent = " --- Rock";
-      break;
-    case "paper":
-      playerPaper.classList.add("selected");
-      playerChoiceEl.textContent = " --- Paper";
-      break;
-    case "scissors":
-      playerScissors.classList.add("selected");
-      playerChoiceEl.textContent = " --- Scissors";
-      break;
-    case "lizard":
-      playerLizard.classList.add("selected");
-      playerChoiceEl.textContent = " --- Lizard";
-      break;
-    case "spock":
-      playerSpock.classList.add("selected");
-      playerChoiceEl.textContent = " --- Spock";
-      break;
-    default:
-      break;
-  }
-}
-
-// Confetti.js downloaded from https://www.cssscript.com/confetti-falling-animation/
 var confetti = {
-	maxCount: 250,		//set max confetti count
-	speed: 4,			//set the particle animation speed
-	frameInterval: 1,	//the confetti animation frame interval in milliseconds
+	maxCount: 150,		//set max confetti count
+	speed: 2,			//set the particle animation speed
+	frameInterval: 15,	//the confetti animation frame interval in milliseconds
 	alpha: 1.0,			//the alpha opacity of the confetti (between 0 and 1, where 1 is opaque and 0 is invisible)
-	gradient: true,	//whether to use gradients for the confetti particles
+	gradient: false,	//whether to use gradients for the confetti particles
 	start: null,		//call to start confetti animation (with optional timeout in milliseconds, and optional min and max random confetti count)
 	stop: null,			//call to stop adding confetti
 	toggle: null,		//call to start or stop the confetti animation depending on whether it's already running
@@ -363,4 +210,5 @@ function updateParticles() {
 			}
 		}
 	}
-};
+}
+
